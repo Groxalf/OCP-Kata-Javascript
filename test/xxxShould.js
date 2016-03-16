@@ -2,27 +2,39 @@
 let should = require('chai').should();
 describe('OCP Kata', () => {
   it('say the number', () => {
-    ocpkata(DefaultRule()).say(1).should.equal('1');
-    ocpkata(DefaultRule()).say(2).should.equal('2');
+    OcpKata(DefaultRule()).say(1).should.equal('1');
+    OcpKata(DefaultRule()).say(2).should.equal('2');
   });
 
   it('say Fizz', () => {
-    ocpkata(FizzRule()).say(3).should.equal('Fizz');
-    ocpkata(FizzRule()).say(6).should.equal('Fizz');
+    OcpKata(FizzRule()).say(3).should.equal('Fizz');
+    OcpKata(FizzRule()).say(6).should.equal('Fizz');
   });
 
   it('say Buzz', () => {
-    ocpkata(BuzzRule()).say(5).should.equal('Buzz');
-    ocpkata(BuzzRule()).say(10).should.equal('Buzz');
+    OcpKata(BuzzRule()).say(5).should.equal('Buzz');
+    OcpKata(BuzzRule()).say(10).should.equal('Buzz');
+  });
+
+  it('say FizzBuzz', () => {
+    OcpKata(FizzRule(), BuzzRule()).say(3*5).should.equal('FizzBuzz');
   });
 
 
 })
 
-function ocpkata(rule) {
+function OcpKata() {
+  var rules = Array.prototype.slice.call(arguments);
+
+  function applyRules(number) {
+    return rules.reduce((acc, currentRule) => {
+      return acc + currentRule.say(number);
+    }, '');
+
+  }
 
   return {
-    say : (number) => rule.say(number)
+    say : applyRules
     }
 }
 
@@ -32,11 +44,6 @@ function DefaultRule() {
     }
 }
 
-function FizzRule() {
-  return {
-    say: (number) => 'Fizz'
-  }
-}
 function FizzRule() {
   return {
     say: (number) => 'Fizz'
