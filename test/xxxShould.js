@@ -11,6 +11,12 @@ describe('OCP Kata', () => {
     ocpkata(FizzRule()).say(6).should.equal('Fizz');
   });
 
+  it('say Buzz', () => {
+    ocpkata(BuzzRule()).say(5).should.equal('Buzz');
+    ocpkata(BuzzRule()).say(10).should.equal('Buzz');
+  });
+
+
 })
 
 function ocpkata(rule) {
@@ -29,5 +35,16 @@ function DefaultRule() {
 function FizzRule() {
   return {
     say: (number) => 'Fizz'
+  }
+}
+function FizzRule() {
+  return {
+    say: (number) => 'Fizz'
+  }
+}
+
+function BuzzRule() {
+  return {
+    say: (number) => 'Buzz'
   }
 }
